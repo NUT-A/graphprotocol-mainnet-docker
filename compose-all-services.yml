@@ -63,7 +63,7 @@ services:
 ######################################################################################
 
   indexer-service:
-    image: ${INDEXER_SERVICE_VERSION:-kwetlesen/autoagora-indexer-service:latest}
+    image: ${INDEXER_SERVICE_VERSION:-ghcr.io/semiotic-ai/autoagora-indexer-service:v0.1.2-v0.20.11}
     hostname: indexer-service
     depends_on:
       - index-node-0
@@ -281,7 +281,7 @@ services:
 
 
   index-node-0:
-    image: ${GRAPH_NODE_VERSION:-graphprotocol/graph-node:v0.29.0}
+    image: ${GRAPH_NODE_VERSION:-graphprotocol/graph-node:v0.30.0}
     hostname: index-node-0
     depends_on:
       - postgres
@@ -329,7 +329,7 @@ services:
 
 
   query-node-0:
-    image: ${GRAPH_NODE_VERSION:-graphprotocol/graph-node:v0.29.0}
+    image: ${GRAPH_NODE_VERSION:-graphprotocol/graph-node:v0.30.0}
     hostname: query-node-0
     depends_on:
       - postgres
@@ -386,6 +386,7 @@ services:
       POSTGRES_USER: ${DB_USER:-graph-node}
       POSTGRES_PASSWORD: ${DB_PASS:-db-password}
       POSTGRES_DB: ${GRAPH_NODE_DB_NAME:-graph-node}
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./postgres-socket:/var/run/postgresql
