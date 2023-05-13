@@ -20,7 +20,7 @@ services:
 
   poi-radio:
     image: ghcr.io/graphops/poi-radio:0.2
-    container_name: poi-radio
+    hostname: poi-radio
     restart: unless-stopped
     environment:
       GRAPHCAST_NETWORK: "mainnet"
@@ -42,7 +42,7 @@ services:
 
   poifier:
     image: grassets/poifier-client:v2.0.3
-    container_name: poifier
+    hostname: poifier
     command:
       - '--poifier-server=https://poifier.io'
       - '--graph-node-status-endpoint=http://index-node-0:8030/graphql'
@@ -61,7 +61,7 @@ services:
 
   indexer-agent-gui:
     image: ${INDEXER_AGENT_GUI:-ghcr.io/stakemachine/indexer-agent-ui:v0.1.14}
-    container_name: indexer-agent-gui
+    hostname: indexer-agent-gui
     expose:
       - 3000
     environment:
